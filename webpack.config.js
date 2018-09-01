@@ -15,11 +15,11 @@ module.exports = {
     rules: [
       {
         test: /\.md$/,
-        use: './loaders/index.js',
+        use: require.resolve('./loaders/markdown-loader.js'),
       },
       {
-        test: /utils\/data.js/,
-        use: './loaders/utils-loader.js'
+        test: /utils(\/|\\)data\.js/,
+        use: require.resolve('./loaders/utils-loader.js')
       }
     ]
   }
