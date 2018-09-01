@@ -1,6 +1,11 @@
+---
+order: 0
+title: test3
+---
+
 # HMap
 
-  &nbsp;&nbsp;&nbsp;&nbsp;`HMap`是以一个用于开发WebGIS客户端的**JavaScript**包。底图数据来源于Google Maps, 与其他的图层在HMap中进行叠加, 目前对点要素的支持比较友好, 可以通过HMap直接在地图上增加点类要素或者通过geojson文件批量添加点类要素( geojson文件格式见文末), 且每一个要素图层都支持聚合功能并可以自定义每个图层聚合时候的样式。
+  &nbsp;&nbsp;&nbsp;&nbsp;`HMap`是以一个用于开发WebGIS客户端的**JavaScript**包。底图数据来源于Google Maps, 与其他的图层在HMap中进行叠加, 目前对点要素的支持比较友好, 可以通过HMap直接在地图上增加点类要素或者通过geojson文件批量添加点类要素( geojson文件格式见文末), 且每一个要素图层都支持聚合功能并可以自定义每个图层聚合时候的样式。  
   &nbsp;&nbsp;&nbsp;&nbsp;`HMap` 除了可以在浏览器中帮助开发者实现地图浏览的基本效果, 比如放大( Zoom In)、缩小( Zoom Out)、平移( Pan)等常用操作之外, 还可以进行要素选择、图层叠加、图层显隐性、长度测量、面积测量、弹框、鼠标点击事件、鼠标移动事件等不同的操作。
 
 ---
@@ -73,18 +78,18 @@ map.addLayer(layername, distance, clusterimg)
 ```
 * 方法参数：
 
-    | 参数 | 参数类型 | 参数说明 |
-    | :-------- | :--------| :------ |
-    | layername| string, 必填| 图层名称|
-    | distance| Integer, 必填| 聚合的距离(像素单位)|
-    | clusterimg| string, 必填| 该图层聚合时候的聚合样式图片地址|
+| 参数 | 参数类型 | 参数说明 |
+| :-------- | :--------| :------ |
+| layername| string, 必填| 图层名称|
+| distance| Integer, 必填| 聚合的距离(像素单位)|
+| clusterimg| string, 必填| 该图层聚合时候的聚合样式图片地址|
  
 
 * 返回：
 
-    | 返回类型 | 说明 |
-    | :--------| :------ |
-    | layer| 返回一个layer矢量图层|
+| 返回类型 | 说明 |
+| :--------| :------ |
+| layer| 返回一个layer矢量图层|
   
 
 * 示例：
@@ -99,18 +104,18 @@ map.batchAddDrag(layername, distance, clusterimg)
 ```
 * 方法参数：
 
-    | 参数 | 参数类型 | 参数说明 |
-    | :-------- | :--------| :------ |
-    | layername| string, 必填| 图层名称|
-    | distance| Integer, 必填| 聚合的距离(像素单位)|
-    | clusterimg| string, 必填| 该图层聚合时候的聚合样式图片地址|
+| 参数 | 参数类型 | 参数说明 |
+| :-------- | :--------| :------ |
+| layername| string, 必填| 图层名称|
+| distance| Integer, 必填| 聚合的距离(像素单位)|
+| clusterimg| string, 必填| 该图层聚合时候的聚合样式图片地址|
  
 
 * 返回：
 
-    | 返回类型 | 说明 |
-    | :--------| :------ |
-    | layer| 返回通过拖动文件到地图的方法而添加到地图上的图层|
+| 返回类型 | 说明 |
+| :--------| :------ |
+| layer| 返回通过拖动文件到地图的方法而添加到地图上的图层|
   
 
 * 示例：
@@ -125,19 +130,19 @@ map.batchAddUrl(layername, url, distance, clusterimg)
 ```
 * 方法参数：
 
-    | 参数 | 参数类型 | 参数说明 |
-    | :-------- | :--------| :------ |
-    | layername| string, 必填| 图层名称|
-    | url| string, 必填| geojson文件的url|
-    | distance| Integer, 必填| 聚合的距离(像素单位)|
-    | clusterimg| string, 必填| 该图层聚合时候的聚合样式图片地址|
+| 参数 | 参数类型 | 参数说明 |
+| :-------- | :--------| :------ |
+| layername| string, 必填| 图层名称|
+| url| string, 必填| geojson文件的url|
+| distance| Integer, 必填| 聚合的距离(像素单位)|
+| clusterimg| string, 必填| 该图层聚合时候的聚合样式图片地址|
  
 
 * 返回：
 
-    | 返回类型 | 说明 |
-    | :--------| :------ |
-    | layer| 返回该文件在地图上所形成的图层|
+| 返回类型 | 说明 |
+| :--------| :------ |
+| layer| 返回该文件在地图上所形成的图层|
   
 
 * 示例：
@@ -157,22 +162,22 @@ layer.addPoint(options)
 ```
  * 方法参数：
 
-    | 参数 | 参数类型 | 参数说明 |
-    | :-------- | :--------| :------ |
-    | coor| array, 必填| 需要添加的点要素的经纬度坐标|
-    | img| string,可选|需要添加的点的图片地址|
-    | imgrealwidth| number,可选| 图片真实的宽度, 如果与imgtargetwidth宽度相同或者不设置该参数, 则图片1:1显示|
-    | imgtargetwidth| number,可选| 想要的图片宽度, 如果与imgrealwidth宽度相同或者不设置该参数, 则图片1:1显示|
-    | onClick| function,可选| 可以设置该点的点击事件|
-    | onHover| function,可选| 可以设置该点的鼠标悬停方法|
-    | onMouseOut| function,可选| 可以设置鼠标移出该点的时候的方法|
-    | extraArgs| object, 可选| 可以添加该要素的一些额外的信息, 比如地名等|
+| 参数 | 参数类型 | 参数说明 |
+| :-------- | :--------| :------ |
+| coor| array, 必填| 需要添加的点要素的经纬度坐标|
+| img| string,可选|需要添加的点的图片地址|
+| imgrealwidth| number,可选| 图片真实的宽度, 如果与imgtargetwidth宽度相同或者不设置该参数, 则图片1:1显示|
+| imgtargetwidth| number,可选| 想要的图片宽度, 如果与imgrealwidth宽度相同或者不设置该参数, 则图片1:1显示|
+| onClick| function,可选| 可以设置该点的点击事件|
+| onHover| function,可选| 可以设置该点的鼠标悬停方法|
+| onMouseOut| function,可选| 可以设置鼠标移出该点的时候的方法|
+| extraArgs| object, 可选| 可以添加该要素的一些额外的信息, 比如地名等|
    
  * 返回：
 
-    | 返回类型 | 说明 |
-    | :--------| :------ |
-    | point| 返回新建的点要素|
+| 返回类型 | 说明 |
+| :--------| :------ |
+| point| 返回新建的点要素|
  
 
  * 示例1：添加一个不带事件的点
@@ -242,16 +247,16 @@ layer.deletePoint(point)
 ```
 * 方法参数：
 
-    | 参数 | 参数类型 | 参数说明 |
-    | :-------- | :--------| :------ |
-    | point| point, 必填| 需要删除的某个点|
+| 参数 | 参数类型 | 参数说明 |
+| :-------- | :--------| :------ |
+| point| point, 必填| 需要删除的某个点|
   
 
 * 返回：
 
-    | 返回类型 | 说明 |
-    | :--------| :------ |
-    | point| 返回删除的点要素|
+| 返回类型 | 说明 |
+| :--------| :------ |
+| point| 返回删除的点要素|
   
 
 * 示例：
@@ -266,9 +271,9 @@ layer.setVisible(isVisible)
 ```
 * 方法参数：
 
-    | 参数 | 参数类型 | 参数说明 |
-    | :-------- | :--------| :------ |
-    | isVisible| boolean, 可选| true:显示；false:隐藏|
+| 参数 | 参数类型 | 参数说明 |
+| :-------- | :--------| :------ |
+| isVisible| boolean, 可选| true:显示；false:隐藏|
  
 
 * 返回： null
@@ -287,17 +292,17 @@ map.popUpWindow(point, popupdiv)
 ```
 * 方法参数：
 
-    | 参数 | 参数类型 | 参数说明 |
-    | :-------- | :--------| :------ |
-    | point| point, 必填| 需要弹窗的点要素|
-    | popupdiv| string, 可选| 弹窗上要展示的div信息|
+| 参数 | 参数类型 | 参数说明 |
+| :-------- | :--------| :------ |
+| point| point, 必填| 需要弹窗的点要素|
+| popupdiv| string, 可选| 弹窗上要展示的div信息|
  
 
 * 返回：
 
-    | 返回类型 | 说明 |
-    | :--------| :------ |
-    | popup| 返回该弹窗|
+| 返回类型 | 说明 |
+| :--------| :------ |
+| popup| 返回该弹窗|
  
 
 * 示例：
@@ -500,6 +505,6 @@ point.setStyle({img: './sources/yyy.jpg',imgrealwidth:40, imgtargetwidth:60})
 	]
 }
 ```
-**说明**：geojson文件以.geojson为后缀。每个点要素主要含有3个属性：`type、geometry、properties`.
-&nbsp;&nbsp;&nbsp;&nbsp;`geometry`含有坐标信息;
-&nbsp;&nbsp;&nbsp;&nbsp;`properties`里面定义各种属性信息, 当含有“`name`”属性时, 会在多边形选择后返回该对象的所有的属性信息; 当含有“`hoverpopucontent`”属性时,当鼠标移动到该点要素上的时候, 会弹框显示hoverpopucontent属性的值; 当需要给点设置对应的样式时, 请将img的url设置为`imgsrc`属性；如需重新指定图片的大小, 请将图片的真实宽度设置为`imgrealwidth`属性, 将需要改变成的宽度设置为`imgtargetwidth`属性；如需设置鼠标点击时弹窗展示的信息, 请设置在`clickpopucontent`属性。如上面的示例所示。
+**说明**：geojson文件以.geojson为后缀。每个点要素主要含有3个属性：`type、geometry、properties`.  
+&nbsp;&nbsp;&nbsp;&nbsp;`geometry`含有坐标信息;  
+&nbsp;&nbsp;&nbsp;&nbsp;`properties`里面定义各种属性信息, 当含有“`name`”属性时, 会在多边形选择后返回该对象的所有的属性信息; 当含有“`hoverpopucontent`”属性时,当鼠标移动到该点要素上的时候, 会弹框显示hoverpopucontent属性的值; 当需要给点设置对应的样式时, 请将img的url设置为`imgsrc`属性；如需重新指定图片的大小, 请将图片的真实宽度设置为`imgrealwidth`属性, 将需要改变成的宽度设置为`imgtargetwidth`属性；如需设置鼠标点击时弹窗展示的信息, 请设置在`clickpopucontent`属性。如上面的示例所示。 
