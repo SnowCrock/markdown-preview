@@ -4,7 +4,7 @@ const MT = require('mark-twain')
 const highlight = require('./highlight')
 const markdown = require('markdown').markdown
 
-const resolve = dir => path.resolve(process.cwd(), dir )
+const resolve = dir => path.resolve(process.cwd(), dir)
 let aviableFiles = []
 
 module.exports = function() {
@@ -18,11 +18,11 @@ module.exports = function() {
   // })
   let content = ''
   aviableFiles.forEach(item => {
-    content += `      ${item.filename}: require('${item.path}'),\n`
+    content += `${item.filename}: require('${item.path}'),\n` + '  '.repeat(3)
   })
   return `module.exports = {
     component: {
-${content}
+      ${content}
     }
   }`
 }
@@ -34,9 +34,9 @@ function generate(source) {
 function findvalidFiles(filename) {
   if(isDirectory(filename)) {
     return fs.readdirSync(filename).filter(file => {
-      if(/\.md/.test(file)) aviableFiles.push({ path: path.join(filename, file), filename: getFilename(file)})
+      if(/\.md/.test(file)) aviableFiles.push({ path: getPath(path.join(filename, file)), filename: getFilename(file)})
     })
-  } else if(/\.md/.test(filename)) aviableFiles.push({filename: getFilename(filename), path: filename})
+  } else if(/\.md/.test(filename)) aviableFiles.push({filename: getFilename(filename), path: getPath(filename)})
   else return false
 }
 
@@ -51,6 +51,10 @@ function getDirectory(path) {
 }
 
 function getFilename(path) {
-  const paths = path.split('/')
+  const paths = path.replace(/\\/g, '/').split('/')
   return paths[paths.length - 1].replace(/\.+/, '')
+}
+
+function getPath(path) {
+  return path.replace(/\\/g, '\\\\')
 }

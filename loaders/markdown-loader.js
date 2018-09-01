@@ -1,4 +1,5 @@
 const MT = require('mark-twain')
+const toReact = require('./markdown-to-react')
 const highlight = require('./highlight')
 const markdown = require('markdown').markdown
 const fs = require('fs')
@@ -15,7 +16,10 @@ const md = require('markdown-it')()
 
 module.exports = function(source) {
   const jsonML = MT(source)
-  const { html: highlightCode, code } = highlight(jsonML)
+  const react = toReact(jsonML.content)
+  const { title = '' } = jsonML.meta || {}
+  const { html: highlightCode } = highlight(jsonML)
+
   function renderReact(React) {
 
   }
@@ -29,10 +33,12 @@ module.exports = function(source) {
     }
   `
   return `
+    const React = require('react')
     module.exports = {
       html: ${JSON.stringify(highlightCode)},
       preivew: ${content},
-      result: ${JSON.stringify(md.render(source))}
+      result: ${JSON.stringify(md.render(source))},
+      react: ${react},
     }
   `
 }
