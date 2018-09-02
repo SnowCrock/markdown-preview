@@ -117,7 +117,7 @@ function hasChangeLine(str) {
  */
 function stringToArray(str) {
   let result = ''
-  const arr = str.replace(/^'|'$/g, ' ').split('\n')
+  const arr = str.replace(/^['"]|['"]$/g, ' ').split('\n')
   arr.forEach(item => result += `'${item}',\n`)
   return result
 }
