@@ -1,12 +1,15 @@
 const React = require('react')
+const Prism = require('prismjs')
 
-module.exports = function(source) {
+const loadLanguages = require('prismjs/components/')
+
+loadLanguages(['jsx', 'json'])
+
+module.exports = function (source) {
   source.shift()
   let reactApp = '[\n'
   source.forEach(element => {
     if (!element) return
-    const type = element[0]
-    if(type === 'pre') return
     reactApp += generateSource(element, 1)
   })
   reactApp += ']'
@@ -14,15 +17,19 @@ module.exports = function(source) {
 }
 
 function generateSource(source, deep) {
-  deep +=1
+  deep += 1
   const nextDeep = deep + 1
   if (typeof source === 'string') {
     return `${indent(deep)}'${source}',\n`
   }
 
-  let [ type, children ] = source
-  if (type === 'pre') return `${indent(deep)}null,\n`
-  children = source.length > 2 ? source.slice(1): children
+  let [type, children] = source
+  if (type === 'pre') {
+    const lang = getLang(source)
+    const code = Prism.highlight(getCode(source), Prism.languages[lang], lang)
+    return createCodeElement(code, lang, deep)
+  }
+  children = source.length > 2 ? source.slice(1) : children
   if (Array.isArray(children)) {
     if (isElement(children)) {
       const childType = children.shift()
@@ -30,7 +37,7 @@ function generateSource(source, deep) {
         const child = children.shift()
         return createElement(childType, child, deep)
       }
-      const childElement = createElement(childType, children.map(item => generateSource(item, nextDeep+1)), deep+1)
+      const childElement = createElement(childType, children.map(item => generateSource(item, nextDeep + 1)), deep + 1)
       return createElement(type, '\n' + childElement, deep)
     }
 
@@ -48,8 +55,8 @@ function createElement(type, children, deep) {
     if (Array.isArray(children)) {
       children = '[\n' + toString(children) + strDeep + indent(1) + '],'
     }
-  } else if (isChildText(children)){
-    children = `"${children}"`
+  } else if (isChildText(children)) {
+    children = `\`${children}\``
   } else {
     children = children
   }
@@ -63,12 +70,23 @@ function createElement(type, children, deep) {
         children: [
           ${stringToArray(children)},
         ]}),\n`
-      )
+    )
   }
   return (
     `${strDeep}React.createElement('${type}', {
       ${childrenDeep}children: ${children}
     ${childrenDeep}}),\n`
+  )
+}
+
+function createCodeElement(code, lang, deep) {
+  const strDeep = indent(deep - 2)
+  return (
+    `${strDeep}React.createElement(
+      ${strDeep}"pre",
+      ${strDeep}{ className: "language-${lang}" },
+      ${strDeep}React.createElement("code", { className: "language-${lang}", dangerouslySetInnerHTML: { __html: \`${code}\` } })
+    ),\n`
   )
 }
 
@@ -120,4 +138,16 @@ function stringToArray(str) {
   const arr = str.replace(/^['"]|['"]$/g, ' ').split('\n')
   arr.forEach(item => result += `'${item}',\n`)
   return result
+}
+
+/**
+ * 得到代码断
+ */
+
+function getCode(el) {
+  return el[2][0] === 'code' && el[2][1]
+}
+
+function getLang(el) {
+  return el[1].lang || 'js'
 }
