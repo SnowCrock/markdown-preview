@@ -15,7 +15,7 @@ title: test3
 导入该js包到你的项目:
 
 ```js
-<script src="http://192.168.130.99:9090/hgis.js"></script>
+<script src="gis.js"></script>
 ```
 
 <!-- ## 支持的浏览器 -->
@@ -33,17 +33,17 @@ new Hmap(options)
 ```
 * 方法参数：
 
-    | 参数 | 参数类型 | 参数说明 |
-    | :-------- | :--------| :------ |
-    | target| string, 必填| 地图容器div的Id|
-    | tileSize| integer, 可选| 瓦片大小|
-    | measureTool| boolean, 可选| 是否显示地图的测量工具|
-    | center| array, 必填| 地图初始化的时候的中心点|
-    | zoom| Integer, 可选| 地图初始化的时候的缩放等级, 1~19|
-    | minZoom| Integer, 可选| 地图可以缩放到的最小的等级, 1~19|
-    | maxZoom| Integer, 可选| 图可以缩放到的最大的等级, 1~19|
-    | scaleline| boolean, 可选| 是否显示比例尺控件|
-    | onMouseClick| function, 可选| 添加地图的鼠标点击事件, 参数e表示鼠标点击位置的经纬度坐标, 具体方法请自定义|
+| 参数 | 参数类型 | 参数说明 |
+| :-------- | :--------| :------ |
+| target| string, 必填| 地图容器div的Id|
+| tileSize| integer, 可选| 瓦片大小|
+| measureTool| boolean, 可选| 是否显示地图的测量工具|
+| center| array, 必填| 地图初始化的时候的中心点|
+| zoom| Integer, 可选| 地图初始化的时候的缩放等级, 1~19|
+| minZoom| Integer, 可选| 地图可以缩放到的最小的等级, 1~19|
+| maxZoom| Integer, 可选| 图可以缩放到的最大的等级, 1~19|
+| scaleline| boolean, 可选| 是否显示比例尺控件|
+| onMouseClick| function, 可选| 添加地图的鼠标点击事件, 参数e表示鼠标点击位置的经纬度坐标, 具体方法请自定义|
  
 
 * 返回：
@@ -352,10 +352,10 @@ map.setMapCenter(coordinate, time)
 ```
 * 方法参数：
 
-    | 参数 | 参数类型 | 参数说明 |
-    | :-------- | :--------| :------ |
-    | coordinate| array, 必填| 中心点坐标|
-    | time| integer, 可选| 动画持续时间, 默认为200|
+  | 参数 | 参数类型 | 参数说明 |
+  | :-------- | :--------| :------ |
+  | coordinate| array, 必填| 中心点坐标|
+  | time| integer, 可选| 动画持续时间, 默认为200|
   
 
 * 返回：null
@@ -373,9 +373,9 @@ map.setMapCenterWioutAnimation(coordinate)
 ```
 * 方法参数：
 
-    | 参数 | 参数类型 | 参数说明 |
-    | :-------- | :--------| :------ |
-    | coordinate| array, 必填| 中心点坐标|
+  | 参数 | 参数类型 | 参数说明 |
+  | :-------- | :--------| :------ |
+  | coordinate| array, 必填| 中心点坐标|
   
 
 * 返回：null
@@ -393,10 +393,10 @@ map.setMapCenterWioutAnimation(coordinate)
  ```
 * 方法参数：
 
-    | 参数 | 参数类型 | 参数说明 |
-    | :-------- | :--------| :------ |
-    | styleoptions| object, 可选| completeStyle: 绘制完成时多边形的样式, drawingStyle: 绘制时候的多边形的样式|
-    | callback| function, 必填| 多边形选择结束时返回的选中要素( points)的处理方法, 可自定义|
+  | 参数 | 参数类型 | 参数说明 |
+  | :-------- | :--------| :------ |
+  | styleoptions| object, 可选| completeStyle: 绘制完成时多边形的样式, drawingStyle: 绘制时候的多边形的样式|
+  | callback| function, 必填| 多边形选择结束时返回的选中要素( points)的处理方法, 可自定义|
    
 
 * 返回：null
@@ -444,11 +444,11 @@ point.setStyle(options)
 ```
 * 方法参数：
 
-    | 参数 | 参数类型 | 参数说明 |
-    | :-------- | :--------| :------ |
-    | imgurl| string,必填| 要素的样式图片地址|
-    | imgrealwidth| number,可选| 图片真实的宽度, 如果与imgtargetwidth宽度相同或者不设置该参数, 则图片1:1显示|
-    | imgtargetwidth| number,可选| 想要的图片宽度, 如果与imgrealwidth宽度相同或者不设置该参数, 则图片1:1显示|
+  | 参数 | 参数类型 | 参数说明 |
+  | :-------- | :--------| :------ |
+  | imgurl| string,必填| 要素的样式图片地址|
+  | imgrealwidth| number,可选| 图片真实的宽度, 如果与imgtargetwidth宽度相同或者不设置该参数, 则图片1:1显示|
+  | imgtargetwidth| number,可选| 想要的图片宽度, 如果与imgrealwidth宽度相同或者不设置该参数, 则图片1:1显示|
  
 
 * 返回：null

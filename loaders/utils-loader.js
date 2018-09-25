@@ -4,6 +4,12 @@ const MT = require('mark-twain')
 const highlight = require('./highlight')
 const markdown = require('markdown').markdown
 
+const readdirSync = fs.readdirSync
+
+function isDirectory(filename) {
+  return fs.statSync(filename).isDirectory()
+}
+
 const resolve = dir => path.resolve(process.cwd(), dir)
 let aviableFiles = []
 
@@ -15,17 +21,36 @@ const afterDirs = {}
 
 module.exports = function() {
   aviableFiles = []
-  Object.keys(dirs).forEach(prefix => afterDirs[prefix] = generate(dirs[prefix], prefix))
-
+  Object.keys(dirs).forEach(prefix => afterDirs[prefix] = generateVaildFiles(dirs[prefix], prefix))
   let content = ''
-  aviableFiles.forEach(item => {
-    content += `${item.filename}: require('${item.path}'),\n` + '  '.repeat(3)
+  afterDirs.component.forEach(item => {
+    content += '  '.repeat(3) + `'${item.filename}': require('${item.path}'),\n`
   })
   return `module.exports = {
     component: {
       ${content}
     }
   }`
+}
+
+function generateVaildFiles(dirname, prefix) {
+  let validFiles = []
+  readdirSync(dirname)
+  .map(file => findvalidFiles(dirname, file))
+  return validFiles
+
+  function findvalidFiles(currentDir, currentFile) {
+    const nextDir = path.join(currentDir, currentFile)
+    if(isDirectory(nextDir)) {
+      const files = readdirSync(nextDir)
+        .filter(isTargetFile)
+        .map(file => ({
+          filename: [`${prefix}-${currentFile}-${file}`],
+          path: path.join(nextDir, file).replace(/\\/g, '/')
+        }))
+        validFiles = validFiles.concat(files)
+    } else if(isTargetFile(currentFile)) validFiles.push({[`${prefix}-${currentFile}`]: currentDir.replace(/\\/g, '/')})
+  }
 }
 
 function generate(source, prefix) {
@@ -43,11 +68,6 @@ function findvalidFiles(currentDir, filename, prefix) {
   } else if(isTargetFile(filename)) aviableFiles.push({filename: getFilename(filename), path: getPath(filename)})
   else return false
 }
-
-function isDirectory(filename) {
-  return fs.statSync(filename).isDirectory()
-}
-
 
 function getDirectory(path) {
   const paths = path.split('/')

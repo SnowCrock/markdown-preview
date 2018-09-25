@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-// import Layout from './Layouts'
+import Routers from './routers'
 import './styles/prism.css'
 
 const data = require('./utils/data.js')
@@ -22,7 +22,7 @@ class App extends React.Component {
     // const app = new Function('', markdown.code)()
     return (
       <div>
-        {data.component.gisreadmemd.react}
+        {Object.keys(data.component).map(key => data.component[key].react)}
         {/* {data.map(item => <div dangerouslySetInnerHTML={{__html: item.result}}></div>)} */}
         {/* <div dangerouslySetInnerHTML={{__html: gisReadMe.result}}></div> */}
       </div>
@@ -30,4 +30,4 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.render(<App/>, document.getElementById('root'))
+ReactDOM.render(<App />, document.getElementById('root'))
