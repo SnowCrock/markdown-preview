@@ -1,3 +1,23 @@
-body {
-  
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+.li-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+
+  &-header {
+    height: 64px;
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: auto;
+  }
+
+  &-content {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: auto;
+  }
 }
