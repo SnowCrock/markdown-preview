@@ -16,14 +16,27 @@ const routes = components.map(key => (
   />
 ))
 
+const menus = [
+  { name: '首页', path: '/home' },
+  { name: '组件', path: '/components' },
+  { name: '模块1', path: '/module1' },
+  { name: '模块2', path: '/module2' },
+  { name: '模块3', path: '/module3' },
+]
+
 export default (props) => (
   <Layout>
     <div className="li-layout-header">
-      <ul>
+      <ul className="li-layout-header-container">
+        {menus.map(item => (
+          <li key={item.path}>
+            <Link to={item.path}>{item.name}</Link>
+          </li>
+        ))}
         {components.map(key => (
-          <Link key={key} to={`/home/components/${key}`}>
-            <li>{key}</li>
-          </Link>
+          <li key={key} >
+            <Link to={`/home/components/${key}`}>{key}</Link>
+          </li>
         ))}
       </ul>
     </div>
